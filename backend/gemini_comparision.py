@@ -1,5 +1,4 @@
 import os
-
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
@@ -44,38 +43,44 @@ SPORT_PROMPTS = {
     )
 }
 
+SPORT_VIDEOS = {
+    "basketball": r"C:\\Users\\zarar\\projects\\stephShot - Made with Clipchamp.mp4",
+    "soccer": r"C:\\Users\\zarar\\projects\\ronaldoKick.mp4",
+    "boxing": r"C:\\Users\\zarar\\projects\\tysonUppercut.mp4",
+    "golf": r"C:\\Users\\zarar\\projects\\tigerSwing.mp4"
+}    
 
-# Pre-upload your reference video (Steph Curry)
-stephFile = client.files.upload(
-    file=r"C:\\Users\\zarar\\projects\\stephShot - Made with Clipchamp.mp4"
-)
+
 @app.post("/analyze-video/{sport}")
 async def analyze_video(sport: str, user_video: UploadFile = File(...)):
     if sport not in SPORT_PROMPTS:
         raise HTTPException(status_code=400, detail="Unsupported sport.")
-
+    reference_path = SPORT_VIDEOS[sport]
+    referenceFile = client.files.upload(file=reference_path)
     prompt = SPORT_PROMPTS[sport]
+    
     # Save uploaded user video temporarily
     user_path = f"temp_{user_video.filename}"
     with open(user_path, "wb") as f:
         f.write(await user_video.read())
     myfile = client.files.upload(file= user_path)
-    print(myfile.state, stephFile.state)
+    print(myfile.state, referenceFile.state)
     while True:
         file_state_user = client.files.get(name=myfile.name)
-        file_state_steph = client.files.get(name=stephFile.name)
+        file_state_reference = client.files.get(name=referenceFile.name)
 
-        if file_state_user.state == "ACTIVE" and file_state_steph.state == "ACTIVE":
+        if file_state_user.state == "ACTIVE" and file_state_reference.state == "ACTIVE":
             break
-        elif file_state_user.state == "FAILED" or file_state_steph.state == "FAILED":
-            raise RuntimeError(f"File processing failed: {file_state_user.error} {file_state_steph.error}")
+        elif file_state_user.state == "FAILED" or file_state_reference.state == "FAILED":
+            raise RuntimeError(f"File processing failed: {file_state_user.error} {file_state_reference.error}")
         time.sleep(1)  # wait 1 second before checking again
-        response = client.models.generate_content(
+
+    response = client.models.generate_content(
         model="gemini-2.5-flash",
-        contents=[prompt, myfile, stephFile],
+        contents=[prompt, myfile, referenceFile],
     )
     os.remove(user_path)  # Clean up the temporary file
-    return {"response": response.text}
+    return JSONResponse(content={"sport": sport, "response": response.text})
 
 
 

@@ -152,46 +152,4 @@ ShadowSync/
     └── .env.example          # Environment variables template
 ```
 
-## API Endpoints
 
-- `POST /api/signup` - Create a new user account
-- `POST /api/login` - Login and get JWT token
-- `GET /api/me` - Get current user info (requires auth)
-- `GET /api/sports` - Get list of supported sports
-- `POST /api/analyze-video/{sport}` - Upload and analyze video (requires auth)
-
-## Notes
-
-- The application uses SQLite database which will be created automatically on first run
-- Uploaded videos are temporarily stored during analysis and then deleted
-- Each video analysis may take 10-30 seconds depending on video size and Gemini API response time
-- Make sure you have a valid Gemini API key with sufficient quota
-
-## Demo Tips
-
-When pitching to investors:
-1. Have a pre-recorded demo video ready for each sport
-2. Keep videos short (5-10 seconds) for faster analysis
-3. Ensure good lighting and clear view of the form
-4. Test your Gemini API connection before the demo
-
-## Troubleshooting
-
-**Backend won't start:**
-- Make sure your virtual environment is activated
-- Verify all dependencies are installed: `pip install -r requirements.txt`
-- Check that your `.env` file has a valid Gemini API key
-
-**Frontend won't connect to backend:**
-- Verify the backend is running on port 8000
-- Check the `VITE_API_URL` in frontend `.env` file
-- Look for CORS errors in browser console
-
-**Video analysis fails:**
-- Verify your Gemini API key is valid and has quota
-- Check that reference video files exist in the backend directory
-- Ensure uploaded video is in a supported format (mp4, mov, avi)
-
-## License
-
-This project is for demonstration purposes.

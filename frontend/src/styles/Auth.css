@@ -3,28 +3,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #0a0a0a;
 }
 
 .auth-box {
-  background: white;
+  background: #1a1a1a;
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+  border: 1px solid #333;
   width: 100%;
   max-width: 400px;
 }
 
 .auth-box h1 {
   text-align: center;
-  color: #667eea;
+  color: #9b59b6;
   margin-bottom: 10px;
   font-size: 32px;
+  text-shadow: 0 0 20px rgba(155, 89, 182, 0.5);
 }
 
 .auth-box h2 {
   text-align: center;
-  color: #333;
+  color: #b0b0b0;
   margin-bottom: 30px;
   font-size: 24px;
 }
@@ -37,30 +39,34 @@
 
 .auth-box input {
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid #333;
   border-radius: 5px;
   font-size: 16px;
+  background: #0a0a0a;
+  color: #e0e0e0;
 }
 
 .auth-box input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #9b59b6;
+  box-shadow: 0 0 10px rgba(155, 89, 182, 0.3);
 }
 
 .auth-box button {
   padding: 12px;
-  background: #667eea;
+  background: #9b59b6;
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s;
 }
 
 .auth-box button:hover:not(:disabled) {
-  background: #5568d3;
+  background: #8e44ad;
+  box-shadow: 0 0 15px rgba(155, 89, 182, 0.5);
 }
 
 .auth-box button:disabled {
@@ -69,25 +75,66 @@
 }
 
 .auth-box .error {
-  color: #e74c3c;
+  color: #ff6b6b;
   font-size: 14px;
   padding: 8px;
-  background: #ffeaea;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
   border-radius: 5px;
 }
 
 .auth-box p {
   text-align: center;
   margin-top: 20px;
-  color: #666;
+  color: #808080;
 }
 
 .auth-box a {
-  color: #667eea;
+  color: #9b59b6;
   text-decoration: none;
   font-weight: 600;
 }
 
 .auth-box a:hover {
   text-decoration: underline;
+  color: #b388d1;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .auth-box {
+    padding: 30px 25px;
+    margin: 20px;
+  }
+
+  .auth-box h1 {
+    font-size: 28px;
+  }
+
+  .auth-box h2 {
+    font-size: 20px;
+  }
+
+  .auth-box input {
+    font-size: 14px;
+  }
+
+  .auth-box button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-box {
+    padding: 25px 20px;
+    margin: 15px;
+  }
+
+  .auth-box h1 {
+    font-size: 24px;
+  }
+
+  .auth-box h2 {
+    font-size: 18px;
+  }
 }

@@ -32,7 +32,7 @@ const Signup: React.FC = () => {
   return (
     <div className="auth-container">
       <div className="auth-box">
-        <h1>ShadowSync</h1>
+        <h1>Shadow⛓️Sync</h1>
         <h2>Sign Up</h2>
         <form onSubmit={handleSubmit}>
           <input

@@ -9,8 +9,8 @@ from fastapi.responses import JSONResponse
 import time
 
 # Load environment variables
-load_dotenv(dotenv_path=r"c:\\Users\\zarar\\projects\\APIKEY.env.txt")
-api_key = os.getenv("API_KEY")
+load_dotenv()
+api_key = os.getenv("GEMINI_API_KEY")
 
 app = FastAPI()
 client = genai.Client(api_key=api_key)
@@ -19,7 +19,7 @@ client = genai.Client(api_key=api_key)
 BASE_DIR = Path(__file__).resolve().parent
 
 # Define paths relative to the project root
-REFERENCE_VIDEOS_DIR = BASE_DIR / "reference_videos"
+REFERENCE_VIDEOS_DIR = BASE_DIR
 TEMP_UPLOADS_DIR = BASE_DIR / "temp_uploads"
 
 # Create directories if they don't exist
@@ -47,7 +47,6 @@ SPORT_PROMPTS = {
         "punch form (jab, cross, hook, uppercut), hip rotation, and defensive movements. "
         "Provide a similarity score (percentage) and explain where the user's technique aligns with or differs from "
         "a professional's form. Suggest targeted improvements for power, precision, and defense. "
-        "If the uploaded video does not show a boxing action, reject it."
     ),
 
     "golf": (
